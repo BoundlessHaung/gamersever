@@ -7,7 +7,7 @@ class User extends Validate
 {
     protected $rule = [
         'username'  => 'require|length:4,12|regex:/^\w+$/',  // 用户名
-        'password'  => 'require|length:6,16|regex:/^[\w\@\!\#\$\%\^\&\*\.\~\-\+\=\{\}\[\]\:\;\"\'\|\\\<\,\>\?\/]+$/'   // 物品名称
+        'password'  => 'require|length:6,16|regex:/^[\w\@\!\#\$\%\^\&\*\.\~\-\+\=\{\}\[\]\:\;\"\\\'\\\\<\,\>\?\/]+$/'   // 物品名称
     ];
     protected $message = [
         'username.require'  => '必须填写用户名',
