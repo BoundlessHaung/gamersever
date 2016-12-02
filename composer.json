@@ -1,0 +1,7 @@
+{
+    "require": {
+        "topthink/think-helper": "^1.0",
+        "workerman/workerman": "^3.3",
+        "predis/predis": "^1.1"
+    }
+}
