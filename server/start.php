@@ -29,7 +29,7 @@ $mc_server->playerlist = array();
 $mc_server->onConnect = function($connection)
 {
 	global $mc_server;
-	echo "IP为：" . $connection->getRemoteIp() . "的用户连接到了服务器\n";
+	echo "IP为：" . $connection->getRemoteIp() . "的用户连接到服务器\n";
 	Timer::add(2, function($connection, $mc_server)
 	{
 		if ($connection->username) {
@@ -72,10 +72,7 @@ $mc_server->onMessage = function($connection, $data)
 					'status' => 0,
 					'msg' => '登录失败，链接断开'
 				]))->close();
-			}
-			Str::random(4);// 我是来搞笑的
-			echo "随机着玩：" . Str::random(4) . "\n";
-			
+			}			
 			break;
 		default:
 			$connection->send('ERROR：未知的数据类型。');
