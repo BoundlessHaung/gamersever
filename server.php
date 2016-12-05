@@ -13,5 +13,10 @@
 
 // 注册Composer依赖管理自动加载
 require 'vendor/autoload.php';
+
+// 注册自动加载
+require 'Autoloader.php';
+Autoloader::register();
+
 // 加载服务器引导文件
 require __DIR__ . '/server/start.php';
