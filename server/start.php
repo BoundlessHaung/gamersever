@@ -35,18 +35,8 @@ $mc_server->onConnect = function($connection)
 {
 	global $mc_server;
 	echo "IP为：" . $connection->getRemoteIp() . "的用户连接到服务器\n";
-	Timer::add(2, function($connection, $mc_server)
-	{
-		if ($connection->username) {
-			if ($mc_server->playerlist[$connection->username]) {
-				return;
-			}
-			echo "IP为：" . $connection->getRemoteIp() . "的客户端逾期未做登录操作，已强制断开连接\n";
-			return $connection->close();
-		}
-		// 如果能运行到这里那么就断开链接。
-		return $connection->close();
-	}, array($connection, $mc_server), false);
+	$account = new player\account($mc_server, $connection, "");
+	Timer::add(2, array($account, 'closeIfNotSignIn'), array(), false);
 };
 
 /**

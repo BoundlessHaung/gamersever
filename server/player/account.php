@@ -40,6 +40,23 @@ class account
 	}
 
 	/**
+	 * 如果该链接的用户没有登录则关闭链接
+	 * 
+	 * @return
+	 */
+	public function closeIfNotSignIn() {
+		if ($this->connection->username) {
+			if ($this->server->playerlist[$this->connection->username]) {
+				return;
+			}
+			echo "IP为：" . $this->connection->getRemoteIp() . "的客户端逾期未做登录操作，已强制断开连接\n";
+			return $this->connection->close();
+		}
+		// 如果能运行到这里那么就断开链接。
+		return $this->connection->close();
+	}
+
+	/**
 	 * 做登录操作
 	 * 
 	 * @return
