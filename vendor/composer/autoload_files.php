@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     '9b552a3cc426e3287cc811caefa3cf53' => $vendorDir . '/topthink/think-helper/src/helper.php',
+    'c7359326b6707d98bdc176bf9ddeaebf' => $vendorDir . '/catfan/medoo/medoo.php',
 );

@@ -8,6 +8,7 @@ class ComposerStaticInitbd0d821dfb92e018e1539fe3b34d395b
 {
     public static $files = array (
         '9b552a3cc426e3287cc811caefa3cf53' => __DIR__ . '/..' . '/topthink/think-helper/src/helper.php',
+        'c7359326b6707d98bdc176bf9ddeaebf' => __DIR__ . '/..' . '/catfan/medoo/medoo.php',
     );
 
     public static $prefixLengthsPsr4 = array (
