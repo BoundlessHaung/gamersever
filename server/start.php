@@ -14,7 +14,7 @@ namespace server;
 use Workerman\Worker;
 use Workerman\Lib\Timer;
 use Predis\Client;
-use server\controller;
+use server\eventController;
 
 // 创建一个Worker监听2346端口，使用websocket协议通讯
 $mc_server = new Worker("websocket://0.0.0.0:2346");
@@ -46,8 +46,8 @@ $mc_server->onMessage = function($connection, $data)
 {
 	global $mc_server;
 	echo "IP为：" . $connection->getRemoteIp() . "发来消息：" . $data . "\n";
-	$serverController = new controller($mc_server, $connection, $data);
-	$serverController->doIt();
+	$serverEventController = new eventController($mc_server, $connection, $data);
+	$serverEventController->doIt();
 };
 
 // 运行worker

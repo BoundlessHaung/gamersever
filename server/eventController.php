@@ -16,7 +16,7 @@ namespace server;
  *
  * @author Boundless <george.haung@sandboxcn.com>
  */
-class controller
+class eventController
 {
 
 	// 服务器对象
