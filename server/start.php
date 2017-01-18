@@ -35,7 +35,7 @@ $mc_server->onConnect = function($connection)
 {
 	global $mc_server;
 	echo "IP为：" . $connection->getRemoteIp() . "的用户连接到服务器\n";
-	$account = new player\account($mc_server, $connection, "");
+	$account = new controller\account($mc_server, $connection, "");
 	Timer::add(2, array($account, 'closeIfNotSignIn'), array(), false);
 };
 

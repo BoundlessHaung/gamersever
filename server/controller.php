@@ -50,7 +50,7 @@ class controller
 			if (isset($this->clientMsg['type'])) {
 				switch ($this->clientMsg['type']) {
 					case 'login':
-						$account = new player\account($this->server, $this->connection, $this->clientMsg);
+						$account = new controller\account($this->server, $this->connection, $this->clientMsg);
 						return $account->signin();
 						break;
 					default:

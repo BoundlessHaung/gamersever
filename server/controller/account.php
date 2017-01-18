@@ -9,7 +9,7 @@
 // | Author: Boundless <george.haung@sandboxcn.com>
 // +----------------------------------------------------------------------
 
-namespace server\player;
+namespace server\controller;
 
 /**
  * 用户控制类
