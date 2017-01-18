@@ -14,7 +14,7 @@
             "reference": "ed64408cdc4cdbd390365ba0906d208b987af520",
             "shasum": ""
         },
-        "time": "2016-12-01 07:08:40",
+        "time": "2016-12-01T07:08:40+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -58,7 +58,7 @@
         "suggest": {
             "ext-event": "For better performance."
         },
-        "time": "2016-11-27 08:23:04",
+        "time": "2016-11-27T08:23:04+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -110,7 +110,7 @@
             "ext-curl": "Allows access to Webdis when paired with phpiredis",
             "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
         },
-        "time": "2016-06-16 16:22:20",
+        "time": "2016-06-16T16:22:20+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

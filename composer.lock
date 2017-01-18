@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c8b00dc8da2693cc31531ab8d2a37e93",
     "content-hash": "a8946cfff0a19f251e9ea7b289c65b25",
     "packages": [
         {
@@ -55,7 +54,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2016-06-16 16:22:20"
+            "time": "2016-06-16T16:22:20+00:00"
         },
         {
             "name": "topthink/think-helper",
@@ -91,7 +90,7 @@
                 }
             ],
             "description": "The ThinkPHP5 Helper Package",
-            "time": "2016-12-01 07:08:40"
+            "time": "2016-12-01T07:08:40+00:00"
         },
         {
             "name": "workerman/workerman",
@@ -137,7 +136,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2016-11-27 08:23:04"
+            "time": "2016-11-27T08:23:04+00:00"
         }
     ],
     "packages-dev": [],
