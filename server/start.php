@@ -69,6 +69,18 @@ $mc_server->onMessage = function($connection, $data)
 	$serverEventController = new eventController($mc_server, $connection, $data);
 	$serverEventController->doIt();
 };
+/**
+ * 当有客户端连接断开时
+ */
+$mc_server->onClose = function($connection)
+{
+	global $mc_server;
+	if(isset($connection->username))
+	{
+		// 连接断开时删除映射
+		unset($mc_server->playerlist[$connection->username]);
+	}
+};
 
 // 运行worker
 Worker::runAll();

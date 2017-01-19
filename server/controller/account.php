@@ -74,7 +74,7 @@ class account
 		if ($this->clientMsg['token'] == $this->server->redis->get('signin_' . $this->clientMsg['username'])) {
 			// 将用户名存入链接并以用户名为key将链接的客户端映射到playerlist中
 			$this->connection->username = $this->clientMsg['username'];
-			$this->server->playerlist[$this->clientMsg['username']] = $this->connection;
+			$this->server->playerlist[$this->clientMsg['username']]['client'] = $this->connection;
 			return $this->connection->send(json_encode([
 				'type' => 'login',
 				'status' => 1,
