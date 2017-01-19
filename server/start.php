@@ -23,7 +23,7 @@ $mc_server = new Worker("websocket://0.0.0.0:2346");
 // 启动1个进程对外提供服务
 $mc_server->count = 1;
 
-// 为服务器增加一个属性用来存储在线玩家（映射 username=>$connection）
+// 为服务器增加一个属性用来存储在线玩家（映射 uid=>player）
 $mc_server->playerlist = array();
 
 $mc_server->config = include CONFIG_PATH;
@@ -75,10 +75,10 @@ $mc_server->onMessage = function($connection, $data)
 $mc_server->onClose = function($connection)
 {
 	global $mc_server;
-	if(isset($connection->username))
+	if(isset($connection->uid))
 	{
 		// 连接断开时删除映射
-		unset($mc_server->playerlist[$connection->username]);
+		unset($mc_server->playerlist[$connection->uid]);
 	}
 };
 

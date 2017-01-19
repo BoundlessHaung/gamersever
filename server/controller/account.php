@@ -11,6 +11,8 @@
 
 namespace server\controller;
 
+use server\model\user;
+
 /**
  * 用户控制类
  *
@@ -45,8 +47,8 @@ class account
 	 * @return
 	 */
 	public function closeIfNotSignIn() {
-		if ($this->connection->username) {
-			if ($this->server->playerlist[$this->connection->username]) {
+		if ($this->connection->uid) {
+			if ($this->server->playerlist[$this->connection->uid]) {
 				return;
 			}
 			echo "IP为：" . $this->connection->getRemoteIp() . "的客户端逾期未做登录操作，已强制断开连接\n";
@@ -70,11 +72,17 @@ class account
 			]))->close();
 		}
 		echo "IP：" . $this->connection->getRemoteIp() . " type：" . $this->clientMsg['type'] . " username：" . $this->clientMsg['username'] . " token：" . $this->clientMsg['token'] . "\n";
+
 		// 进行对比
 		if ($this->clientMsg['token'] == $this->server->redis->get('signin_' . $this->clientMsg['username'])) {
+
+			// 根据用户名获取用户ID
+			$usermodel = new user($this->clientMsg['username'], $this->server->database);
+			$loginuserid = $usermodel->getUidByUserName();
+
 			// 将用户名存入链接并以用户名为key将链接的客户端映射到playerlist中
-			$this->connection->username = $this->clientMsg['username'];
-			$this->server->playerlist[$this->clientMsg['username']]['client'] = $this->connection;
+			$this->connection->uid = $loginuserid;
+			$this->server->playerlist[$loginuserid]['client'] = $this->connection;
 			return $this->connection->send(json_encode([
 				'type' => 'login',
 				'status' => 1,
