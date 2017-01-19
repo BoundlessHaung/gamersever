@@ -16,6 +16,9 @@ abstract class Model
 	// 用户名
 	protected $username = "";
 
+	// 用户ID
+	protected $uid = 0;
+
 	// 数据库链接
 	protected $databaseconnection = null;
 
@@ -26,10 +29,17 @@ abstract class Model
 	 * 构造函数
 	 *
 	 * @param string $username 用户名
+	 * @param int $uid 用户ID[可选]
 	 * @param object $databaseconnection 数据库连接
 	 */
-	public function __construct($username, $databaseconnection) {
+	public function __construct($username = "",$uid = 0, $databaseconnection = null) {
+		// 当缺少一个参数时UID内的参数就是databaseconnection对象（UID参数在除了登录部分以外不可省略）
+		if ($databaseconnection == null) {
+			$databaseconnection = $uid;
+			$uid = 0;
+		}
 		$this->username = $username;
+		$this->uid = $uid;
 		$this->databaseconnection = $databaseconnection;
 	}
 

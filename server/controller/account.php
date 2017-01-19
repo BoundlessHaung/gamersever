@@ -12,6 +12,7 @@
 namespace server\controller;
 
 use server\model\user;
+use server\model\character;
 
 /**
  * 用户控制类
@@ -80,12 +81,29 @@ class account
 			$usermodel = new user($this->clientMsg['username'], $this->server->database);
 			$loginuserid = $usermodel->getUidByUserName();
 
-			// 将用户名存入链接并以用户名为key将链接的客户端映射到playerlist中
+			// 将用户名及UID存入客户端链接中，并以用户ID为key将链接的客户端映射到playerlist=>uid=>client中
 			$this->connection->uid = $loginuserid;
+			$this->connection->username = $this->clientMsg['username'];
 			$this->server->playerlist[$loginuserid]['client'] = $this->connection;
+
+			// 获取角色信息
+			$charactermodel = new character($this->connection->username, $this->connection->uid, $this->server->database);
+			$usercharacter = $charactermodel->getCharacter();
+			if (count($usercharacter) == 0) {
+				$usercharacter = null;
+				$hascharacter = 0;
+			} else {
+				$usercharacter = $usercharacter[0];
+				$hascharacter = 1;
+			}
+			$this->server->playerlist[$loginuserid]['character'] = $usercharacter;
+			
+			// 返回数据
 			return $this->connection->send(json_encode([
 				'type' => 'login',
 				'status' => 1,
+				'hascharacter' => $hascharacter,
+				'characterdata' => $usercharacter,
 				'msg' => '登录成功'
 			]));
 		} else {
