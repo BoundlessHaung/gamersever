@@ -26,6 +26,8 @@ $mc_server->count = 1;
 // 为服务器增加一个属性用来存储在线玩家（映射 username=>$connection）
 $mc_server->playerlist = array();
 
+$mc_server->config = include CONFIG_PATH;
+
 // redis连接常驻内存
 $mc_server->redis = new Client('tcp://127.0.0.1:6379');
 

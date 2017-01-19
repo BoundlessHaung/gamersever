@@ -9,17 +9,9 @@
 // | Author: Boundless <george.haung@sandboxcn.com>
 // +----------------------------------------------------------------------
 
-// [ 应用入口文件 ]
-
-// 配置文件路径
-define('CONFIG_PATH', __DIR__ . '/config.php');
-
-// 注册Composer依赖管理自动加载
-require 'vendor/autoload.php';
-
-// 注册自动加载
-require 'Autoloader.php';
-Autoloader::register();
-
-// 加载服务器引导文件
-require __DIR__ . '/server/start.php';
+return [
+    // +----------------------------------------------------------------------
+    // | 基础设定
+    // +----------------------------------------------------------------------
+    "timer"             =>  "heheda",
+];
