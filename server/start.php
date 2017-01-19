@@ -15,6 +15,7 @@ use Workerman\Worker;
 use Workerman\Lib\Timer;
 use Predis\Client;
 use server\eventController;
+use medoo;
 
 // 创建一个Worker监听2346端口，使用websocket协议通讯
 $mc_server = new Worker("websocket://0.0.0.0:2346");
@@ -25,8 +26,25 @@ $mc_server->count = 1;
 // 为服务器增加一个属性用来存储在线玩家（映射 username=>$connection）
 $mc_server->playerlist = array();
 
-// redis常驻内存
+// redis连接常驻内存
 $mc_server->redis = new Client('tcp://127.0.0.1:6379');
+
+// 数据库连接常驻内存
+$mc_server->database = new medoo([
+	// 必须配置项
+	'database_type' => 'mysql',
+	'database_name' => 'manor_chaos',
+	'server' => '127.0.0.1',
+	'username' => 'root',
+	'password' => 'killtomcat2016!',
+	'charset' => 'utf8',
+
+	// 可选参数
+	'port' => 3306,
+
+	// 可选，定义表的前缀
+	'prefix' => 'mc_',
+]);
 
 /**
  * 客户端连接服务器
