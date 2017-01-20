@@ -53,13 +53,25 @@ class eventController
 						$account = new controller\account($this->server, $this->connection, $this->clientMsg);
 						return $account->signin();
 						break;
+					case 'creatCharacter':
+						$account = new controller\character($this->server, $this->connection, $this->clientMsg);
+						return $account->creatCharacter();
+						break;
 					default:
-						return $this->connection->send('ERROR：未知的数据类型。');
+						return $this->connection->send(json_encode([
+							'type' => 'ERROR',
+							'status' => 10000,
+							'msg' => 'ERROR：未知数据'
+						]));
 						break;
 				}
 			}
 		}
 		// 运行到这里那就肯定是出错了
-		return $this->connection->send('ERROR：未知的数据类型。');
+		return $this->connection->send(json_encode([
+			'type' => 'ERROR',
+			'status' => 10000,
+			'msg' => 'ERROR：未知数据'
+		]));
 	}
 }

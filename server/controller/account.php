@@ -11,6 +11,7 @@
 
 namespace server\controller;
 
+use server\Controller;
 use server\model\user;
 use server\model\character;
 
@@ -19,28 +20,8 @@ use server\model\character;
  *
  * @author Boundless <george.haung@sandboxcn.com>
  */
-class account
+class account  extends Controller
 {
-
-	// 服务器对象
-	private $server;
-
-	// 链接对象
-	private $connection;
-
-	// 消息
-	private $clientMsg;
-
-	/**
-	 * @param object $server 服务器对象
-	 * @param object $connection 链接客户端对象
-	 * @param string $data 已经格式化的消息数据
-	 */
-	public function __construct($server, $connection, $data) {
-		$this->server = $server;
-		$this->connection = $connection;
-		$this->clientMsg = $data;
-	}
 
 	/**
 	 * 如果该链接的用户没有登录则关闭链接
@@ -97,7 +78,7 @@ class account
 				$hascharacter = 1;
 			}
 			$this->server->playerlist[$loginuserid]['character'] = $usercharacter;
-			
+
 			// 返回数据
 			return $this->connection->send(json_encode([
 				'type' => 'login',

@@ -46,11 +46,23 @@ abstract class Model
 	/**
 	 * 数据库查询
 	 *
-	 * @param array join 多表查询,不使用可以忽略
+	 * @param array $join 多表查询,不使用可以忽略
 	 * @param string|array $columns 要查询的字段名
 	 * @param array $where  查询的条件
+	 *
+	 * @return array
 	 */
 	public function select($join, $columns = null, $where = null) {
 		return $this->databaseconnection->select($this->tablename, $join, $columns, $where);
+	}
+
+	/**
+	 * 添加数据
+	 * @param  array $datas 需要插入的数据
+	 * 
+	 * @return number
+	 */
+	public function insert($datas) {
+		return $this->databaseconnection->insert($this->tablename, $datas);
 	}
 }
