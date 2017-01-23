@@ -50,12 +50,12 @@ class eventController
 			if (isset($this->clientMsg['type'])) {
 				switch ($this->clientMsg['type']) {
 					case 'login':
-						$account = new controller\account($this->server, $this->connection, $this->clientMsg);
-						return $account->signin();
+						$controller = new controller\account($this->server, $this->connection, $this->clientMsg);
+						return $controller->signin();
 						break;
 					case 'creatCharacter':
-						$account = new controller\character($this->server, $this->connection, $this->clientMsg);
-						return $account->creatCharacter();
+						$controller = new controller\player($this->server, $this->connection, $this->clientMsg);
+						return $controller->creatCharacter();
 						break;
 					default:
 						return $this->connection->send(json_encode([
