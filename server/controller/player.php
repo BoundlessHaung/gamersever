@@ -12,14 +12,14 @@
 namespace server\controller;
 
 use server\Controller;
-use server\model\character as characterModel;
+use server\model\character;
 
 /**
  * 角色控制类
  *
  * @author Boundless <george.haung@sandboxcn.com>
  */
-class character extends Controller
+class player extends Controller
 {
 
 	/**
@@ -39,7 +39,7 @@ class character extends Controller
 			echo "IP：" . $this->connection->getRemoteIp() . " type：" . $this->clientMsg['type'] . " charactername：" . $this->clientMsg['charactername'] . "\n";
 
 			// 判断时候满足创建角色的条件
-			$charactermodel = new characterModel($this->connection->username, $this->connection->uid, $this->server->database);
+			$charactermodel = new character($this->connection->username, $this->connection->uid, $this->server->database);
 			if (count($charactermodel->getCharacter()) > 0) {
 				$this->errorMsg = "该用户已经创建过角色";
 				$this->status = 2;
@@ -82,4 +82,5 @@ class character extends Controller
 			'msg' => $this->errorMsg
 		]));
 	}
+
 }
