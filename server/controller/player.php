@@ -83,6 +83,10 @@ class player extends Controller
 		]);
 	}
 
+	/**
+	 * 角色的移动
+	 * @return [type] [description]
+	 */
 	public function characterMove() {
 		if (!isset($this->clientMsg['wordx']) || !isset($this->clientMsg['wordy'])) {
 			return $this->sendMsgToClient([
@@ -91,6 +95,7 @@ class player extends Controller
 				'msg' => '数据格式错误'
 			]);
 		}
+		
 	}
 
 }

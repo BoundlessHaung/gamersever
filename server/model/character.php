@@ -15,7 +15,7 @@ use server\Model;
 
 class character extends Model
 {
-	
+
 	// 表名
 	protected $tablename = "character";
 
@@ -26,9 +26,9 @@ class character extends Model
 	 */
 	public function getCharacter() {
 		return $this->select("*", [
-			    "uid" => $this->uid,
-			    "LIMIT" => 1
-			]);
+			"uid" => $this->uid,
+			"LIMIT" => 1
+		]);
 	}
 
 	/**
@@ -40,15 +40,16 @@ class character extends Model
 	 */
 	public function getCharacterByCharacterName($charactername = "") {
 		return $this->select("*", [
-			    "charactername" => $charactername,
-			    "LIMIT" => 1
-			]);
+			"charactername" => $charactername,
+			"LIMIT" => 1
+		]);
 	}
 
 	/**
 	 * 添加角色
 	 * 
 	 * @param  array $characterdata 角色数据
+	 *
 	 * @return bool
 	 */
 	public function insertCharacter($characterdata) {
@@ -57,5 +58,36 @@ class character extends Model
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * 移动角色
+	 *
+	 * @param  number $x x坐标
+	 * @param  number $y y坐标
+	 *
+	 * @return number        受影响的行数
+	 */
+	public function characterMove($x, $y) {
+		return $this->update([
+			"wordx" => $x,
+			"wordy" => $y
+		], [
+			"uid" => $this->uid
+		]);
+	}
+
+	/**
+	 * 获取当前角色的坐标
+	 *
+	 * @return array
+	 */
+	public function getThisCharacterPos() {
+		return $this->get([
+			"wordx",
+			"wordy"
+		], [
+			"uid" => $this->uid
+		]);
 	}
 }
