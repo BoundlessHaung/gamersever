@@ -29,11 +29,11 @@ class player extends Controller
 	 */
 	public function creatCharacter() {
 		if (!isset($this->clientMsg['type']) || !isset($this->clientMsg['charactername'])) {
-			return $this->connection->send(json_encode([
+			return $this->sendMsgToClient([
 				'type' => 'creatCharacter',
 				'status' => 0,
 				'msg' => '数据格式错误'
-			]));
+			]);
 		}
 		if ($this->hasSignIn()) {
 			echo "IP：" . $this->connection->getRemoteIp() . " type：" . $this->clientMsg['type'] . " charactername：" . $this->clientMsg['charactername'] . "\n";
@@ -76,11 +76,21 @@ class player extends Controller
 			$this->status = 10001;
 		}
 		
-		return $this->connection->send(json_encode([
+		return $this->sendMsgToClient([
 			'type' => 'creatCharacter',
 			'status' => $this->status,
 			'msg' => $this->errorMsg
-		]));
+		]);
+	}
+
+	public function characterMove() {
+		if (!isset($this->clientMsg['wordx']) || !isset($this->clientMsg['wordy'])) {
+			return $this->sendMsgToClient([
+				'type' => 'characterMove',
+				'status' => 0,
+				'msg' => '数据格式错误'
+			]);
+		}
 	}
 
 }

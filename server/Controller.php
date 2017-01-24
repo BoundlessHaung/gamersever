@@ -56,10 +56,11 @@ abstract class Controller
 	 *
 	 * @param  array|string|number  $msg 消息
 	 *
-	 * @return
+	 * @return $this
 	 */
 	public function sendMsgToThisClient($msg = null) {
-		return $this->_sendMsgToClient($this->connection, $msg);
+		$this->_sendMsgToClient($this->connection, $msg);
+		return $this;
 	}
 
 	/**
@@ -67,12 +68,13 @@ abstract class Controller
 	 *
 	 * @param  array|string|number  $msg 消息
 	 *
-	 * @return
+	 * @return $this
 	 */
 	public function sendMsgToAllOnlinePlayers($msg = null) {
 		foreach ($this->server->playerlist as $signinplayer) {
 			$this->_sendMsgToClient($signinplayer['client'], $msg)
 		}
+		return $this;
 	}
 
 	/**
@@ -85,5 +87,20 @@ abstract class Controller
 	 */
 	private function _sendMsgToClient($client, $msg = "") {
 		return $client->send(json_encode($msg));
+	}
+
+	/**
+	 * 关闭当前链接
+	 *
+	 * @return
+	 */
+	public function close() {
+		// 如果是登陆后的用户要从玩家池中清除
+		if (isset($this->connection->uid) || isset($this->connection->username)) {
+			unset($this->server->playerlist[$this->connection->uid]);
+			unset($this->connection->uid);
+			unset($this->connection->username);
+		}
+		return $this->connection->close();
 	}
 }

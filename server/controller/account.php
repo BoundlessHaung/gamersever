@@ -34,10 +34,10 @@ class account  extends Controller
 				return;
 			}
 			echo "IP为：" . $this->connection->getRemoteIp() . "的客户端逾期未做登录操作，已强制断开连接\n";
-			return $this->connection->close();
+			return $this->close();
 		}
 		// 如果能运行到这里那么就断开链接。
-		return $this->connection->close();
+		return $this->close();
 	}
 
 	/**
@@ -47,11 +47,11 @@ class account  extends Controller
 	 */
 	public function signin() {
 		if (!isset($this->clientMsg['type']) || !isset($this->clientMsg['username']) || !isset($this->clientMsg['token'])) {
-			return $this->connection->send(json_encode([
+			return $this->sendMsgToClient([
 				'type' => 'login',
 				'status' => 0,
 				'msg' => '信息有误，链接断开'
-			]))->close();
+			])->close();
 		}
 		echo "IP：" . $this->connection->getRemoteIp() . " type：" . $this->clientMsg['type'] . " username：" . $this->clientMsg['username'] . " token：" . $this->clientMsg['token'] . "\n";
 
@@ -80,19 +80,19 @@ class account  extends Controller
 			$this->server->playerlist[$loginuserid]['character'] = $usercharacter;
 
 			// 返回数据
-			return $this->connection->send(json_encode([
+			return $this->sendMsgToClient([
 				'type' => 'login',
 				'status' => 1,
 				'hascharacter' => $hascharacter,
 				'characterdata' => $usercharacter,
 				'msg' => '登录成功'
-			]));
+			]);
 		} else {
-			return $this->connection->send(json_encode([
+			return $this->sendMsgToClient([
 				'type' => 'login',
 				'status' => 0,
 				'msg' => '登录失败，链接断开'
-			]))->close();
+			])->close();
 		}	
 	}
 }
