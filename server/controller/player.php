@@ -95,7 +95,34 @@ class player extends Controller
 				'msg' => '数据格式错误'
 			]);
 		}
-		
+
+		if ($this->hasSignIn()) {// 必须登录
+			// 获取当前所处的坐标
+			$charactermodel = new character($this->connection->username, $this->connection->uid, $this->server->database);
+			$cloc = $charactermodel->getThisCharacterPos();
+			// 进行移动
+			if (abs($cloc['wordx'] - $this->clientMsg['wordx']) <= 1 && abs($cloc['wordy'] - $this->clientMsg['wordy']) <= 1) {
+				if ($charactermodel->characterMove($this->clientMsg['wordx'], $this->clientMsg['wordy']) > 0) {
+					$this->errorMsg = "movesuccess";
+					$this->status = 1;
+				} else {
+					$this->errorMsg = "未知错误";
+					$this->status = 3;
+				}
+			} else {
+				$this->errorMsg = "非法操作";
+				$this->status = 2;
+			}
+		} else {
+			$this->errorMsg = "非法操作，没有登录";
+			$this->status = 10001;
+		}
+
+		return $this->sendMsgToClient([
+			'type' => 'creatCharacter',
+			'status' => $this->status,
+			'msg' => $this->errorMsg
+		]);
 	}
 
 }
