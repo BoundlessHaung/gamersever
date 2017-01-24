@@ -50,4 +50,40 @@ abstract class Controller
 		}
 		return false;
 	}
+
+	/**
+	 * 向当前客户端发送信息
+	 *
+	 * @param  array|string|number  $msg 消息
+	 *
+	 * @return
+	 */
+	public function sendMsgToThisClient($msg = null) {
+		return $this->_sendMsgToClient($this->connection, $msg);
+	}
+
+	/**
+	 * 向所有在线用户广播消息
+	 *
+	 * @param  array|string|number  $msg 消息
+	 *
+	 * @return
+	 */
+	public function sendMsgToAllOnlinePlayers($msg = null) {
+		foreach ($this->server->playerlist as $signinplayer) {
+			$this->_sendMsgToClient($signinplayer['client'], $msg)
+		}
+	}
+
+	/**
+	 * 向指定的客户端发送消息
+	 *
+	 * @param  object $client 链接的实例
+	 * @param  string $msg    消息
+	 *
+	 * @return
+	 */
+	private function _sendMsgToClient($client, $msg = "") {
+		return $client->send(json_encode($msg));
+	}
 }
