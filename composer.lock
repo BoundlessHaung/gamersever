@@ -149,16 +149,16 @@
         },
         {
             "name": "workerman/workerman",
-            "version": "v3.3.6",
+            "version": "v3.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/walkor/Workerman.git",
-                "reference": "c2e66e75a8c461a52a738ba004ef845397ce64ff"
+                "reference": "d466c0f4b37c6cfb4f27c69b158175c7e7ccc24c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/walkor/Workerman/c2e66e75a8c461a52a738ba004ef845397ce64ff.zip",
-                "reference": "c2e66e75a8c461a52a738ba004ef845397ce64ff",
+                "url": "https://packagist.phpcomposer.com/files/walkor/Workerman/d466c0f4b37c6cfb4f27c69b158175c7e7ccc24c.zip",
+                "reference": "d466c0f4b37c6cfb4f27c69b158175c7e7ccc24c",
                 "shasum": ""
             },
             "require": {
@@ -191,7 +191,7 @@
                 "asynchronous",
                 "event-loop"
             ],
-            "time": "2016-11-27T08:23:04+00:00"
+            "time": "2017-02-02T02:52:58+00:00"
         }
     ],
     "packages-dev": [],
